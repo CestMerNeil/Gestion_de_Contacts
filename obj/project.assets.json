@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\CodeGithub\\ISIMA_ZZ2\\NET\\TP_NOTE\\TP_APP_CONSOLE\\TP_APP_CONSOLE.csproj",
+      "projectUniqueName": "D:\\CodeGithub\\TP_APP_CONSOLE\\TP_APP_CONSOLE.csproj",
       "projectName": "TP_APP_CONSOLE",
-      "projectPath": "D:\\CodeGithub\\ISIMA_ZZ2\\NET\\TP_NOTE\\TP_APP_CONSOLE\\TP_APP_CONSOLE.csproj",
+      "projectPath": "D:\\CodeGithub\\TP_APP_CONSOLE\\TP_APP_CONSOLE.csproj",
       "packagesPath": "C:\\Users\\14531\\.nuget\\packages\\",
-      "outputPath": "D:\\CodeGithub\\ISIMA_ZZ2\\NET\\TP_NOTE\\TP_APP_CONSOLE\\obj\\",
+      "outputPath": "D:\\CodeGithub\\TP_APP_CONSOLE\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\Application\\Visual_Studio\\SDK\\NuGetPackages"
