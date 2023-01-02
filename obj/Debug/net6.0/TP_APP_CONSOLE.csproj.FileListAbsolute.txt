@@ -1,0 +1,15 @@
+D:\CodeGithub\ISIMA_ZZ2\NET\TP_NOTE\TP_APP_CONSOLE\obj\Debug\net6.0\TP_APP_CONSOLE.csproj.AssemblyReference.cache
+D:\CodeGithub\ISIMA_ZZ2\NET\TP_NOTE\TP_APP_CONSOLE\obj\Debug\net6.0\TP_APP_CONSOLE.GeneratedMSBuildEditorConfig.editorconfig
+D:\CodeGithub\ISIMA_ZZ2\NET\TP_NOTE\TP_APP_CONSOLE\obj\Debug\net6.0\TP_APP_CONSOLE.AssemblyInfoInputs.cache
+D:\CodeGithub\ISIMA_ZZ2\NET\TP_NOTE\TP_APP_CONSOLE\obj\Debug\net6.0\TP_APP_CONSOLE.AssemblyInfo.cs
+D:\CodeGithub\ISIMA_ZZ2\NET\TP_NOTE\TP_APP_CONSOLE\obj\Debug\net6.0\TP_APP_CONSOLE.csproj.CoreCompileInputs.cache
+D:\CodeGithub\ISIMA_ZZ2\NET\TP_NOTE\TP_APP_CONSOLE\bin\Debug\net6.0\TP_APP_CONSOLE.exe
+D:\CodeGithub\ISIMA_ZZ2\NET\TP_NOTE\TP_APP_CONSOLE\bin\Debug\net6.0\TP_APP_CONSOLE.deps.json
+D:\CodeGithub\ISIMA_ZZ2\NET\TP_NOTE\TP_APP_CONSOLE\bin\Debug\net6.0\TP_APP_CONSOLE.runtimeconfig.json
+D:\CodeGithub\ISIMA_ZZ2\NET\TP_NOTE\TP_APP_CONSOLE\bin\Debug\net6.0\TP_APP_CONSOLE.dll
+D:\CodeGithub\ISIMA_ZZ2\NET\TP_NOTE\TP_APP_CONSOLE\bin\Debug\net6.0\TP_APP_CONSOLE.pdb
+D:\CodeGithub\ISIMA_ZZ2\NET\TP_NOTE\TP_APP_CONSOLE\obj\Debug\net6.0\TP_APP_CONSOLE.dll
+D:\CodeGithub\ISIMA_ZZ2\NET\TP_NOTE\TP_APP_CONSOLE\obj\Debug\net6.0\refint\TP_APP_CONSOLE.dll
+D:\CodeGithub\ISIMA_ZZ2\NET\TP_NOTE\TP_APP_CONSOLE\obj\Debug\net6.0\TP_APP_CONSOLE.pdb
+D:\CodeGithub\ISIMA_ZZ2\NET\TP_NOTE\TP_APP_CONSOLE\obj\Debug\net6.0\TP_APP_CONSOLE.genruntimeconfig.cache
+D:\CodeGithub\ISIMA_ZZ2\NET\TP_NOTE\TP_APP_CONSOLE\obj\Debug\net6.0\ref\TP_APP_CONSOLE.dll
