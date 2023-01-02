@@ -5,14 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
 using System.Net.Security;
 
 namespace TP_APP_CONSOLE
 {
     internal class Document_Management
     {
-        private readonly string pathRoot = @"D:\\CodeGithub\\ISIMA_ZZ2\\NET\\TP_NOTE\\TP_APP_CONSOLE\\ROOT";
+        private readonly string pathRoot = @"D:\\CodeGithub\\TP_APP_CONSOLE\\ROOT";
 
         public string GetPathRoot()
         {
@@ -43,7 +42,7 @@ namespace TP_APP_CONSOLE
           * @fn     createFloder
           * @brief  Create a level 1 folder
           */
-        public void CreateFloder(string name)
+        public void CreateFolder(string name)
         {
             try
             {
@@ -60,7 +59,7 @@ namespace TP_APP_CONSOLE
             }
         }
 
-        public void AddContact(string name)
+        public void AddContact(string name, string folder)
         {
             
         }
@@ -72,6 +71,18 @@ namespace TP_APP_CONSOLE
             string time = "Creation time : " + timeCreate.ToString() +
                 ". Modify time : "  + timeMotive.ToString();
             return time;
+        }
+
+        public string GetFolder(DirectoryInfo di)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (DirectoryInfo file in di.GetDirectories())
+            {
+                string location = file.FullName;
+                stringBuilder.Append(file.Name + "  (" + GetTime(location) + ")");
+                stringBuilder.Append("\n");
+            }
+            return stringBuilder.ToString();
         }
     }
 }

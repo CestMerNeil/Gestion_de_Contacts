@@ -13,8 +13,9 @@ namespace TP_APP_CONSOLE
         static void Main(string[] args)
         {
             bool state = true;
-            Document_Management dm = new();
-            dm.CheckRoot();
+            Document_Management documentMangement = new Document_Management();
+            DirectoryInfo directoryInfo = new DirectoryInfo(documentMangement.GetPathRoot());
+            documentMangement.CheckRoot();
 
             Console.WriteLine("Hello, welcome to our system!");
             while (state)
@@ -27,18 +28,26 @@ namespace TP_APP_CONSOLE
                     case "hello":
                         Console.WriteLine("hello");
                         break;
-                    case "display":
-                        string adress = dm.GetPathRoot();
-                        Console.WriteLine(adress);
-                        Console.WriteLine(dm.GetTime(adress));
+                    case "displayroot":
+                        string adress = documentMangement.GetPathRoot();
+                        Console.WriteLine(adress + " " + documentMangement.GetTime(adress));
                         break;
-                    case "addFloder":
+                    case "display":
+                        //documentMangement.GetFolder(directoryInfo);
+                        Console.WriteLine(documentMangement.GetFolder(directoryInfo));
+                        break;
+                    case "addFolder":
                         Console.WriteLine("Please enter the folder name:");
-                        string name = Console.ReadLine();
-                        dm.CreateFloder(name);
+                        string name = "New Folder";    // If entered as empty, name it "New Folder"
+                        name = Console.ReadLine();
+                        documentMangement.CreateFolder(name);
+                        break;
+                    case "addContact":
+                        Console.WriteLine("Please enter the folder you will be using:");
+                        string addC2F = Console.ReadLine();
+                        Console.WriteLine();
                         break;
                     case "exit":
-                        Console.WriteLine("Thank you for using this programme.");
                         state = false;
                         break;
                     default:
@@ -46,6 +55,7 @@ namespace TP_APP_CONSOLE
                         break;
                 }
             }
+            Console.WriteLine("Thank you for using this programme.");
         }
     }
 }
