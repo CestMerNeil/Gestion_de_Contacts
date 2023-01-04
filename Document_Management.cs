@@ -81,8 +81,28 @@ namespace TP_APP_CONSOLE
                 string location = file.FullName;
                 stringBuilder.Append(file.Name + "  (" + GetTime(location) + ")");
                 stringBuilder.Append("\n");
+                foreach (FileInfo fi in file.GetFiles())
+                {
+                    string filename = fi.Name;
+                    stringBuilder.Append("\t");
+                    stringBuilder.Append(filename);
+                    stringBuilder.Append("\n");
+                }
+
             }
             return stringBuilder.ToString();
+        }
+
+        public void help()
+        {
+            Console.WriteLine("hello\t\t-> To get a hello");
+            Console.WriteLine("displayroot\t-> Show root path");
+            Console.WriteLine("display\t\t-> Show all files and folders");
+            Console.WriteLine("addFolder\t-> Add a folder");
+            Console.WriteLine("addContact\t-> Add a contact");
+            Console.WriteLine("exit\t\t-> Exit procedures");
+            Console.WriteLine("--help\t\t-> Find a user manual");
+
         }
     }
 }

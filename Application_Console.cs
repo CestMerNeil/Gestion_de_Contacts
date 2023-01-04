@@ -17,7 +17,7 @@ namespace TP_APP_CONSOLE
             DirectoryInfo directoryInfo = new DirectoryInfo(documentMangement.GetPathRoot());
             documentMangement.CheckRoot();
 
-            Console.WriteLine("Hello, welcome to our system!");
+            Console.WriteLine("Hello, welcome!");
             while (state)
             {
                 Console.WriteLine("Please input your operation.");
@@ -38,8 +38,12 @@ namespace TP_APP_CONSOLE
                         break;
                     case "addFolder":
                         Console.WriteLine("Please enter the folder name:");
-                        string name = "New Folder";    // If entered as empty, name it "New Folder"
+                        string name;
                         name = Console.ReadLine();
+                        if (name == "")     // If entered as empty, name it "New Folder"
+                        {
+                            name = "New Folder"; 
+                        }
                         documentMangement.CreateFolder(name);
                         break;
                     case "addContact":
@@ -48,14 +52,17 @@ namespace TP_APP_CONSOLE
                         Console.WriteLine();
                         break;
                     case "exit":
+                        Console.WriteLine("Thank you for using this programme.");
                         state = false;
                         break;
+                    case "--help":
+                        documentMangement.help();
+                        break;
                     default:
-                        Console.WriteLine("Unknown operator.");
+                        Console.WriteLine("Unknown operator. See <--help>");
                         break;
                 }
             }
-            Console.WriteLine("Thank you for using this programme.");
         }
     }
 }
