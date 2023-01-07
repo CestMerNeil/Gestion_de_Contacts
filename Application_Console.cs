@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -47,9 +48,7 @@ namespace TP_APP_CONSOLE
                         documentMangement.CreateFolder(name);
                         break;
                     case "addContact":
-                        Console.WriteLine("Please enter the folder you will be using:");
-                        string addC2F = Console.ReadLine();
-                        Console.WriteLine();
+                        documentMangement.AddContact(documentMangement);
                         break;
                     case "exit":
                         Console.WriteLine("Thank you for using this programme.");

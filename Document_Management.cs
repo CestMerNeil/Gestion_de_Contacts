@@ -6,12 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using System.Net.Security;
+using Microsoft.Isam.Esent.Interop.Vista;
 
 namespace TP_APP_CONSOLE
 {
     internal class Document_Management
     {
-        private readonly string pathRoot = @"D:\\CodeGithub\\TP_APP_CONSOLE\\ROOT";
+        private readonly string pathRoot = @"D:\CodeGithub\TP_APP_CONSOLE\ROOT";
 
         public string GetPathRoot()
         {
@@ -59,9 +60,39 @@ namespace TP_APP_CONSOLE
             }
         }
 
-        public void AddContact(string name, string folder)
+        public void AddContact(Document_Management dm)
         {
-            
+            StringBuilder pathContact = new StringBuilder();
+            Contact contact = new Contact();
+            pathContact.Append(dm.GetPathRoot());
+            Console.WriteLine("Please enter the folder you will be using:");
+            string addC2F = Console.ReadLine();
+            pathContact.Append("\\");
+            pathContact.Append(addC2F);
+            pathContact.Append("\\");
+            Console.WriteLine("First Name Please!");
+            contact.FirstName = Console.ReadLine();
+            pathContact.Append(contact.FirstName);
+            pathContact.Append(".xml");
+            Console.WriteLine("Last Name Please!");
+            contact.LastName = Console.ReadLine();
+
+            Console.WriteLine("Email Please!");
+            string email;
+            email = Console.ReadLine();
+            while (!contact.IsValidEmail(email))
+            {
+                Console.WriteLine("Wrong Adress,");
+                email = Console.ReadLine();
+            }
+            contact.Email = email;
+
+            Console.WriteLine("Company Please!");
+            contact.Company = Console.ReadLine();
+            Console.WriteLine("Relationship Please!");
+            contact.Relationship = Console.ReadLine();
+
+            iXML.WriteXML(contact, pathContact.ToString());
         }
 
         public string GetTime(string path)
@@ -83,10 +114,28 @@ namespace TP_APP_CONSOLE
                 stringBuilder.Append("\n");
                 foreach (FileInfo fi in file.GetFiles())
                 {
-                    string filename = fi.Name;
-                    stringBuilder.Append("\t");
-                    stringBuilder.Append(filename);
-                    stringBuilder.Append("\n");
+                    string fileType = System.IO.Path.GetExtension(fi.Name);
+                    if (fileType == ".xml")
+                    {
+                        Contact contact = new Contact();
+                        contact = iXML.ReadXML(fi.FullName);
+
+                        stringBuilder.Append("\t");
+                        stringBuilder.Append(contact.FirstName);
+                        stringBuilder.Append(" ");
+                        stringBuilder.Append(contact.LastName);
+                        stringBuilder.Append(" ");
+                        stringBuilder.Append(contact.Email);
+                        stringBuilder.Append(" ");
+                        stringBuilder.Append("\n");
+                    }
+                    else
+                    {
+                        string filename = fi.Name;
+                        stringBuilder.Append("\t");
+                        stringBuilder.Append(filename);
+                        stringBuilder.Append("\n");
+                    }
                 }
 
             }
