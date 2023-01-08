@@ -48,7 +48,28 @@ namespace TP_APP_CONSOLE
                         documentMangement.CreateFolder(name);
                         break;
                     case "addContact":
-                        documentMangement.AddContact(documentMangement);
+                        Console.WriteLine("Please enter the folder you will be using:");
+                        Contact contact = new Contact();
+                        string addC2F = Console.ReadLine();
+                        Console.WriteLine("First Name Please!");
+                        contact.FirstName = Console.ReadLine();
+                        Console.WriteLine("Last Name Please!");
+                        contact.LastName = Console.ReadLine();
+                        Console.WriteLine("Email Please!");
+                        string email = Console.ReadLine();
+                        while (!contact.IsValidEmail(email))
+                        {
+                            Console.WriteLine("Wrong Adress,");
+                            email = Console.ReadLine();
+                        }
+                        contact.Email = email;
+                        Console.WriteLine("Company Please!");
+                        contact.Company = Console.ReadLine();
+                        Console.WriteLine("Relationship Please!");
+                        contact.Relationship = Console.ReadLine();
+                        Console.WriteLine("Write mode, please! 0 -> xml 1 -> binary");
+                        var mode = Console.ReadLine();
+                        documentMangement.AddContact(documentMangement, contact, addC2F, mode);
                         break;
                     case "exit":
                         Console.WriteLine("Thank you for using this programme.");

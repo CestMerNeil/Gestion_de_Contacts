@@ -26,10 +26,19 @@ namespace TP_APP_CONSOLE
 
         public static Contact ReadXML(string path)
         {
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(Contact));
-            StreamReader file = new StreamReader(path);
-            Contact contact = (Contact)xmlSerializer.Deserialize(file);
-            file.Close();
+            Contact contact =  new Contact();
+            try
+            {
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(Contact));
+                StreamReader file = new StreamReader(path);
+                contact = (Contact)xmlSerializer.Deserialize(file);
+                file.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error :" + e.Message);
+                Console.WriteLine("File location : " + path);
+            }
 
             return contact;
         }

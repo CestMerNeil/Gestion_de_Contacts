@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using System.Net.Security;
 using Microsoft.Isam.Esent.Interop.Vista;
+using System.Security;
 
 namespace TP_APP_CONSOLE
 {
@@ -60,39 +61,25 @@ namespace TP_APP_CONSOLE
             }
         }
 
-        public void AddContact(Document_Management dm)
+        public void AddContact(Document_Management dm, Contact contact, string folder, string mode)
         {
             StringBuilder pathContact = new StringBuilder();
-            Contact contact = new Contact();
             pathContact.Append(dm.GetPathRoot());
-            Console.WriteLine("Please enter the folder you will be using:");
-            string addC2F = Console.ReadLine();
             pathContact.Append("\\");
-            pathContact.Append(addC2F);
+            pathContact.Append(folder);
             pathContact.Append("\\");
-            Console.WriteLine("First Name Please!");
-            contact.FirstName = Console.ReadLine();
             pathContact.Append(contact.FirstName);
-            pathContact.Append(".xml");
-            Console.WriteLine("Last Name Please!");
-            contact.LastName = Console.ReadLine();
-
-            Console.WriteLine("Email Please!");
-            string email;
-            email = Console.ReadLine();
-            while (!contact.IsValidEmail(email))
+     
+            if (mode == "0")
             {
-                Console.WriteLine("Wrong Adress,");
-                email = Console.ReadLine();
+                pathContact.Append(".xml");
+                iXML.WriteXML(contact, pathContact.ToString());
             }
-            contact.Email = email;
-
-            Console.WriteLine("Company Please!");
-            contact.Company = Console.ReadLine();
-            Console.WriteLine("Relationship Please!");
-            contact.Relationship = Console.ReadLine();
-
-            iXML.WriteXML(contact, pathContact.ToString());
+            else 
+            {
+                pathContact.Append(".json");
+                iBinary.WriteBinary(contact, pathContact.ToString());
+            }
         }
 
         public string GetTime(string path)
@@ -124,10 +111,33 @@ namespace TP_APP_CONSOLE
                         stringBuilder.Append(contact.FirstName);
                         stringBuilder.Append(" ");
                         stringBuilder.Append(contact.LastName);
-                        stringBuilder.Append(" ");
+                        stringBuilder.Append("(");
+                        stringBuilder.Append(contact.Company);
+                        stringBuilder.Append(")");
+                        stringBuilder.Append(" Email:");
                         stringBuilder.Append(contact.Email);
-                        stringBuilder.Append(" ");
+                        stringBuilder.Append(" Link:");
+                        stringBuilder.Append(contact.Relationship);
                         stringBuilder.Append("\n");
+                    }
+                    else if (fileType == ".json")
+                    {
+                        Contact contact = new Contact();
+                        contact = iBinary.ReadBinary(fi.FullName);
+
+                        stringBuilder.Append("\t");
+                        stringBuilder.Append(contact.FirstName);
+                        stringBuilder.Append(" ");
+                        stringBuilder.Append(contact.LastName);
+                        stringBuilder.Append("(");
+                        stringBuilder.Append(contact.Company);
+                        stringBuilder.Append(")");
+                        stringBuilder.Append(" Email:");
+                        stringBuilder.Append(contact.Email);
+                        stringBuilder.Append(" Link:");
+                        stringBuilder.Append(contact.Relationship);
+                        stringBuilder.Append("\n");
+
                     }
                     else
                     {
@@ -151,7 +161,6 @@ namespace TP_APP_CONSOLE
             Console.WriteLine("addContact\t-> Add a contact");
             Console.WriteLine("exit\t\t-> Exit procedures");
             Console.WriteLine("--help\t\t-> Find a user manual");
-
         }
     }
 }
