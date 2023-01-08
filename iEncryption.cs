@@ -11,6 +11,6 @@ namespace TP_APP_CONSOLE
 {
     internal interface iEncryption
     {
-        public static void 
+        //public static void 
     }
 }

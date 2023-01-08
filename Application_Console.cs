@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http.Headers;
+using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,9 +49,25 @@ namespace TP_APP_CONSOLE
                         documentMangement.CreateFolder(name);
                         break;
                     case "addContact":
-                        Console.WriteLine("Please enter the folder you will be using:");
                         Contact contact = new Contact();
-                        string addC2F = Console.ReadLine();
+                        string addC2F = "Neil";
+                        bool folder = true;
+                        while (folder)
+                        {
+                            Console.WriteLine("Please enter the folder you will be using:");
+                            addC2F = Console.ReadLine();
+                            StringBuilder sb = new StringBuilder();
+                            sb.Append(documentMangement.GetPathRoot())
+                                .Append("\\")
+                                .Append(addC2F);
+                            if (!Directory.Exists(sb.ToString()))
+                            {
+                                Console.WriteLine("Folder wrong !");
+                            }
+                            else
+                                folder = false;
+                        }
+                            
                         Console.WriteLine("First Name Please!");
                         contact.FirstName = Console.ReadLine();
                         Console.WriteLine("Last Name Please!");

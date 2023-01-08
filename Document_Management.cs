@@ -64,11 +64,11 @@ namespace TP_APP_CONSOLE
         public void AddContact(Document_Management dm, Contact contact, string folder, string mode)
         {
             StringBuilder pathContact = new StringBuilder();
-            pathContact.Append(dm.GetPathRoot());
-            pathContact.Append("\\");
-            pathContact.Append(folder);
-            pathContact.Append("\\");
-            pathContact.Append(contact.FirstName);
+            pathContact.Append(dm.GetPathRoot())
+                .Append("\\")
+                .Append(folder)
+                .Append("\\")
+                .Append(contact.FirstName);
      
             if (mode == "0")
             {
@@ -101,11 +101,18 @@ namespace TP_APP_CONSOLE
                 stringBuilder.Append("\n");
                 foreach (FileInfo fi in file.GetFiles())
                 {
-                    string fileType = System.IO.Path.GetExtension(fi.Name);
-                    if (fileType == ".xml")
+                    string fileType = Path.GetExtension(fi.Name);
+                    if (fileType == ".xml" || fileType == ".json")
                     {
                         Contact contact = new Contact();
-                        contact = iXML.ReadXML(fi.FullName);
+                        if (fileType == ".json")
+                        {
+                            contact = iBinary.ReadBinary(fi.FullName);
+                        }
+                        else
+                        {
+                            contact = iXML.ReadXML(fi.FullName);
+                        }
 
                         stringBuilder.Append("\t");
                         stringBuilder.Append(contact.FirstName);
@@ -119,25 +126,6 @@ namespace TP_APP_CONSOLE
                         stringBuilder.Append(" Link:");
                         stringBuilder.Append(contact.Relationship);
                         stringBuilder.Append("\n");
-                    }
-                    else if (fileType == ".json")
-                    {
-                        Contact contact = new Contact();
-                        contact = iBinary.ReadBinary(fi.FullName);
-
-                        stringBuilder.Append("\t");
-                        stringBuilder.Append(contact.FirstName);
-                        stringBuilder.Append(" ");
-                        stringBuilder.Append(contact.LastName);
-                        stringBuilder.Append("(");
-                        stringBuilder.Append(contact.Company);
-                        stringBuilder.Append(")");
-                        stringBuilder.Append(" Email:");
-                        stringBuilder.Append(contact.Email);
-                        stringBuilder.Append(" Link:");
-                        stringBuilder.Append(contact.Relationship);
-                        stringBuilder.Append("\n");
-
                     }
                     else
                     {
