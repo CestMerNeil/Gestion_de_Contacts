@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http.Headers;
-using System.Reflection.Metadata;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
+using System.Security.Cryptography;
+
 
 namespace TP_APP_CONSOLE
 {
@@ -18,6 +12,8 @@ namespace TP_APP_CONSOLE
             Document_Management documentMangement = new Document_Management();
             DirectoryInfo directoryInfo = new DirectoryInfo(documentMangement.GetPathRoot());
             documentMangement.CheckRoot();
+            System.Security.Principal.WindowsIdentity currentUser = System.Security.Principal.WindowsIdentity.GetCurrent();
+            string password = currentUser.User.ToString();
 
             Console.WriteLine("Hello, welcome!");
             while (state)

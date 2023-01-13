@@ -1,13 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.CompilerServices;
-using System.Net.Security;
-using Microsoft.Isam.Esent.Interop.Vista;
-using System.Security;
+﻿using System.Text;
 
 namespace TP_APP_CONSOLE
 {
@@ -61,7 +52,10 @@ namespace TP_APP_CONSOLE
             }
         }
 
-        public void AddContact(Document_Management dm, Contact contact, string folder, string mode)
+        public void AddContact(Document_Management dm,
+                               Contact contact,
+                               string folder,
+                               string mode)
         {
             StringBuilder pathContact = new StringBuilder();
             pathContact.Append(dm.GetPathRoot())

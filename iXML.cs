@@ -1,27 +1,24 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
+﻿using System.Security.Cryptography;
 using System.Xml.Serialization;
-using System.Globalization;
-using System.Text.RegularExpressions;
-using System.Net.Security;
+
 
 namespace TP_APP_CONSOLE
 {
     internal interface iXML
     {
-        public static void WriteXML(Contact contact, string path)
+        public static void WriteXML(Contact contact,
+                                    string path)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(Contact));
-            FileStream file = File.Create(path);
-
-            serializer.Serialize(file, contact);
-            file.Close();
+            FileStream fileStream = File.Create(path);
+            using (Aes aes = Aes.Create())
+            {
+                ICryptoTransform cryptoTransform = aes.CreateEncryptor();
+                using (CryptoStream cryptoStream = new CryptoStream(fileStream, cryptoTransform, CryptoStreamMode.Write))
+                {
+                    serializer.Serialize(cryptoStream, contact);
+                }
+            }
         }
 
         public static Contact ReadXML(string path)
@@ -30,9 +27,15 @@ namespace TP_APP_CONSOLE
             try
             {
                 XmlSerializer xmlSerializer = new XmlSerializer(typeof(Contact));
-                StreamReader file = new StreamReader(path);
-                contact = (Contact)xmlSerializer.Deserialize(file);
-                file.Close();
+                FileStream fileStream = File.Create(path);
+                using (Aes aes = Aes.Create())
+                {
+                    ICryptoTransform decryptoTransform = aes.CreateEncryptor();
+                    using (CryptoStream cryptoStream = new CryptoStream(fileStream, decryptoTransform, CryptoStreamMode.Read))
+                    {
+                        contact = (Contact)xmlSerializer.Deserialize(cryptoStream);
+                    }
+                }
             }
             catch (Exception e)
             {
