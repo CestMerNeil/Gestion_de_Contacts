@@ -50,7 +50,7 @@ namespace TP_APP_CONSOLE
                         bool folder = true;
                         while (folder)
                         {
-                            Console.WriteLine("Please enter the folder you will be using:");
+                            Console.WriteLine("Please enter the folder will be using:");
                             addC2F = Console.ReadLine();
                             StringBuilder sb = new StringBuilder();
                             sb.Append(documentMangement.GetPathRoot())
