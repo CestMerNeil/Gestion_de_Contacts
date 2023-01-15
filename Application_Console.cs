@@ -32,7 +32,7 @@ namespace TP_APP_CONSOLE
                         break;
                     case "display":
                         //documentMangement.GetFolder(directoryInfo);
-                        Console.WriteLine(documentMangement.GetFolder(directoryInfo));
+                        Console.WriteLine(documentMangement.GetFolder(directoryInfo, password));
                         break;
                     case "addFolder":
                         Console.WriteLine("Please enter the folder name:");
@@ -40,7 +40,7 @@ namespace TP_APP_CONSOLE
                         name = Console.ReadLine();
                         if (name == "")     // If entered as empty, name it "New Folder"
                         {
-                            name = "New Folder"; 
+                            name = "New_Folder"; 
                         }
                         documentMangement.CreateFolder(name);
                         break;
@@ -82,7 +82,7 @@ namespace TP_APP_CONSOLE
                         contact.Relationship = Console.ReadLine();
                         Console.WriteLine("Write mode, please! 0 -> xml 1 -> binary");
                         var mode = Console.ReadLine();
-                        documentMangement.AddContact(documentMangement, contact, addC2F, mode);
+                        documentMangement.AddContact(documentMangement, contact, addC2F, mode, password);
                         break;
                     case "exit":
                         Console.WriteLine("Thank you for using this programme.");

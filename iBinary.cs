@@ -1,5 +1,8 @@
 ﻿using System.Runtime.ExceptionServices;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.Cryptography;
 using System.Text;
+using System.Xml.Linq;
 
 namespace TP_APP_CONSOLE
 {
@@ -39,6 +42,39 @@ namespace TP_APP_CONSOLE
                 }
             }
             return contact;
+        }
+
+        private static byte[] GetEncryptionKey(string password)
+        {
+            var salt = new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 };
+            var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 1000);
+            return pbkdf2.GetBytes(16);
+        }
+
+        public static void WriteBinary(Contact data, string filePath, string password)
+        {
+            var formatter = new BinaryFormatter();
+            var encryptionKey = GetEncryptionKey(password);
+
+            using (var fs = new FileStream(filePath, FileMode.Create))
+            using (var encryptor = new AesCryptoServiceProvider().CreateEncryptor(encryptionKey, encryptionKey))
+            using (var cryptoStream = new CryptoStream(fs, encryptor, CryptoStreamMode.Write))
+            {
+                formatter.Serialize(cryptoStream, data);
+            }
+        }
+
+        public static Contact ReadBinary(string filePath, string password)
+        {
+            var formatter = new BinaryFormatter();
+            var encryptionKey = GetEncryptionKey(password);
+
+            using (var fs = new FileStream(filePath, FileMode.Open))
+            using (var decryptor = new AesCryptoServiceProvider().CreateDecryptor(encryptionKey, encryptionKey))
+            using (var cryptoStream = new CryptoStream(fs, decryptor, CryptoStreamMode.Read))
+            {
+                return (Contact)formatter.Deserialize(cryptoStream);
+            }
         }
     }
 }

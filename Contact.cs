@@ -3,6 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace TP_APP_CONSOLE
 {
+    [Serializable]
     public class Contact
     {
         public string? FirstName { get; set; }

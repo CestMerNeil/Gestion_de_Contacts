@@ -55,7 +55,8 @@ namespace TP_APP_CONSOLE
         public void AddContact(Document_Management dm,
                                Contact contact,
                                string folder,
-                               string mode)
+                               string mode,
+                               string password)
         {
             StringBuilder pathContact = new StringBuilder();
             pathContact.Append(dm.GetPathRoot())
@@ -67,12 +68,12 @@ namespace TP_APP_CONSOLE
             if (mode == "0")
             {
                 pathContact.Append(".xml");
-                iXML.WriteXML(contact, pathContact.ToString());
+                iXML.WriteXML(contact, pathContact.ToString(), password);
             }
             else 
             {
                 pathContact.Append(".json");
-                iBinary.WriteBinary(contact, pathContact.ToString());
+                iBinary.WriteBinary(contact, pathContact.ToString(), password);
             }
         }
 
@@ -85,7 +86,7 @@ namespace TP_APP_CONSOLE
             return time;
         }
 
-        public string GetFolder(DirectoryInfo di)
+        public string GetFolder(DirectoryInfo di, string password)
         {
             StringBuilder stringBuilder = new StringBuilder();
             foreach (DirectoryInfo file in di.GetDirectories())
@@ -98,14 +99,14 @@ namespace TP_APP_CONSOLE
                     string fileType = Path.GetExtension(fi.Name);
                     if (fileType == ".xml" || fileType == ".json")
                     {
-                        Contact contact = new Contact();
+                        Contact contact;
                         if (fileType == ".json")
                         {
-                            contact = iBinary.ReadBinary(fi.FullName);
+                            contact = iBinary.ReadBinary(fi.FullName, password);
                         }
                         else
                         {
-                            contact = iXML.ReadXML(fi.FullName);
+                            contact = iXML.ReadXML(fi.FullName, password);
                         }
 
                         stringBuilder.Append("\t");
@@ -124,9 +125,9 @@ namespace TP_APP_CONSOLE
                     else
                     {
                         string filename = fi.Name;
-                        stringBuilder.Append("\t");
-                        stringBuilder.Append(filename);
-                        stringBuilder.Append("\n");
+                        stringBuilder.Append("\t")
+                            .Append(filename)
+                            .Append("\n");
                     }
                 }
 
